@@ -1,4 +1,5 @@
 import { getProviders, signIn } from "next-auth/react";
+import { Footer } from "./../components/Footer";
 
 function Login({ providers }) {
   return (
@@ -19,6 +20,8 @@ function Login({ providers }) {
           </button>
         </div>
       ))}
+
+      <Footer />
     </div>
   );
 }
