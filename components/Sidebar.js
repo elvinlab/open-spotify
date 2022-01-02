@@ -24,8 +24,6 @@ export const Sidebar = () => {
       spotifyAPI.getUserPlaylists().then((data) => {
         setPlaylists(data.body.items);
 
-        console.log(data.body.items);
-
         setPlaylistId(data.body.items[0]?.id);
       });
     }
