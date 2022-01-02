@@ -1,14 +1,34 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
+import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
 import { UseSpotify } from "../hooks/UseSpotify";
-import { playlistState } from "./../atoms/playlistAtom";
 import { millisToMinutesAndSeconds } from "./../lib/time";
 
 export const Song = ({ track, order }) => {
   const spotifyAPI = UseSpotify();
 
-  console.log(track);
+  const [currentTrackId, setCurrentTrackId] =
+    useRecoilState(currentTrackIdState);
+
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
+
+  const playSong = () => {
+    setCurrentTrackId(track.track.id);
+    setIsPlaying(true);
+
+    spotifyAPI
+      .play({
+        uris: [track.track.uri],
+      })
+      .catch((err) => {
+        alert("Elegir un dispositivo donde cuente con Spotify");
+      });
+  };
+
   return (
-    <div className="grid grid-cols-2 text-gray-500 py-4 px-5 hover:bg-gray-900 rounded-lg cursor-pointer">
+    <div
+      className="grid grid-cols-2 text-gray-500 py-4 px-5 hover:bg-gray-900 rounded-lg cursor-pointer"
+      onClick={playSong}
+    >
       <div className="flex items-center space-x-4">
         <p>{order + 1}</p>
         <img

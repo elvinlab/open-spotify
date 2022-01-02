@@ -15,7 +15,7 @@ function Login({ providers }) {
             className="bg-[#18D860] text-white p-5 rounded-full"
             onClick={() => signIn(provider.id, { callbackUrl: "/" })}
           >
-            Iniciar sesión - Spotify
+            Iniciar sesión con Spotify
           </button>
         </div>
       ))}
